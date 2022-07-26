@@ -1,0 +1,23 @@
+if i run my project in python manage.py runserver --insecure . By this i got my static as well.
+
+Solution 1:
+
+python manage.py runserver --insecure
+Solution 2:
+
+But I Need Permanent Solution. then i install pip install dj-static==0.0.6 and add some code to my wsgi.py file:
+
+from django.core.wsgi import get_wsgi_application
+from dj_static import Cling
+
+application = Cling(get_wsgi_application())
+and then i added some in setting.py:
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, '/static/')
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+after run server just run:python manage.py collectstatic
+after finished collecstatic run : python manage.py runserver
